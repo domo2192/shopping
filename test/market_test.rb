@@ -79,7 +79,7 @@ class MarketTest < Minitest::Test
                 @item2 => 7,
                 @item4 => 50,
                 @item3 => 35}
-    assert_equal expected, @market.items_hash 
+    assert_equal expected, @market.items_hash
   end
 
   def test_total_inventory
@@ -111,5 +111,19 @@ class MarketTest < Minitest::Test
        },
      }
      assert_equal expected, @market.total_inventory
+  end
+
+  def test_overstocked_items
+    @market.add_vendor(@vendor1)
+    @market.add_vendor(@vendor2)
+    @market.add_vendor(@vendor3)
+    @vendor1.stock(@item1, 35)
+    @vendor1.stock(@item2, 7)
+    @vendor2.stock(@item4, 50)
+    @vendor2.stock(@item3, 25)
+    @vendor3.stock(@item1, 65)
+    @vendor3.stock(@item3, 10)
+    assert_equal [@item1], @market.overstocked_items 
+
   end
 end
