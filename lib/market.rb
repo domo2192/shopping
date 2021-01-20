@@ -50,6 +50,30 @@ class Market
     items_hash.keys.map do |item|
       item.name
     end.sort
+  end
 
+  def date
+    Date.today.strftime('%d/%m/%Y')
+  end
+
+  def sell(item, amount)
+  sum = vendors_that_sell(item).each do |vendor|
+      vendor.inventory.sum do |item, quan|
+        quan
+      require "pry"; binding.pry
+    # vendors_that_sell(item).reduce(amount) do |acc, vendor|
+    #    stock = vendor.check_stock(item)
+    #    total = stock - amount
+    #    if total < 0
+    #      amount = stock
+    #      return false
+    #    else
+    #      amount = stock - total
+    #      vendor.stock(item, -amount)
+    #      require "pry"; binding.pry
+    #      acc - amount
+    #      return true
+      end 
+     end
   end
 end
