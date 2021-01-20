@@ -37,6 +37,12 @@ class Market
       info = {quantity: amount,
              vendors: vendors_that_sell(item)}
       [item, info]
-    end.to_h 
+    end.to_h
+  end
+
+  def overstocked_items
+    items_hash.find_all do |item, amount|
+      (amount > 50) && (vendors_that_sell(item).count > 1)
+    end.to_h.keys 
   end
 end
