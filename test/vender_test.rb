@@ -17,7 +17,8 @@ class VendorTest < Minitest::Test
     assert_equal expected, @vendor.inventory
   end
 
-  def test_inventory
+  def test_inventory_starts_at_0_and_stock_adds_to_it
+    assert_equal 0, @vendor.check_stock(@item1)
 
   end
 end
