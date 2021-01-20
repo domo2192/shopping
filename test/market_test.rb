@@ -3,6 +3,8 @@ require 'minitest/pride'
 require './lib/item'
 require './lib/vendor'
 require './lib/market'
+require 'mocha/minitest'
+require 'date'
 
 class MarketTest < Minitest::Test
 
@@ -136,7 +138,11 @@ class MarketTest < Minitest::Test
     @vendor2.stock(@item3, 25)
     @vendor3.stock(@item1, 65)
     @vendor3.stock(@item3, 10)
-    assert_equal ["Banana Nice Cream", "Peach", "Peach-Raspberry Nice Cream", "Tomato"], @market.sorted_item_list 
+    assert_equal ["Banana Nice Cream", "Peach", "Peach-Raspberry Nice Cream", "Tomato"], @market.sorted_item_list
+  end
 
+  def test_date_method_for_market
+    Date.stubs(:today).returns(Date.new(2020, 02, 24))
+    assert_equal "24/02/2020", @market.date 
   end
 end

@@ -43,6 +43,13 @@ class Market
   def overstocked_items
     items_hash.find_all do |item, amount|
       (amount > 50) && (vendors_that_sell(item).count > 1)
-    end.to_h.keys 
+    end.to_h.keys
+  end
+
+  def sorted_item_list
+    items_hash.keys.map do |item|
+      item.name
+    end.sort
+
   end
 end
